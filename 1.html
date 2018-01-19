@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>24234234234</title>
+    <!-- 引入 echarts.js -->
+</head>
+<body >
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+
+</body>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript">
+
+function fuc(dtd){
+    setTimeout(function(){
+        alert('第一个方法执行完成');
+        dtd.resolve();
+        
+    },5000);
+
+    alert('进入第一个方法');
+   return dtd; 
+    
+}
+function fucc(dtdd){
+    setTimeout(function(){
+        alert('第二个方法执行完成');
+        dtdd.resolve();
+
+    },5000);
+    alert('进入第二个方法');
+    //return dtdd;  
+}
+
+function fuccc(){
+    alert('进入第三个方法');
+}
+ var dtd = $.Deferred();
+ var dtdd = $.Deferred();
+
+$(function(){
+  
+    var wait = function(dtdd){
+
+        $.when(fuc(dtd)).done(function(){
+
+            fucc(dtdd);
+            //
+        });
+        return dtdd;
+    }
+    $.when(wait(dtdd)).done(function(){
+        fuccc();
+    });
+});
+</script>
+</html>
